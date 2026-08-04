@@ -23,7 +23,9 @@
   },
   "homepage": "https://github.com/ObiMartins/nodejs-task-manager#readme",
   "dependencies": {
-    "express": "^5.2.1"
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mongoose": "^9.9.1"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
