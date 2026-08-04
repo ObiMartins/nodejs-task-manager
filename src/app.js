@@ -1,4 +1,8 @@
+require("dotenv").config();
 const express = require("express");
+
+// Connect to MongoDB
+require("./db/mongoose");
 
 const healthRoutes = require("./routes/healthRoutes");
 const taskRoutes = require("./routes/taskRoutes");
