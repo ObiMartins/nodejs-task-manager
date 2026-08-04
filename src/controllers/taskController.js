@@ -10,6 +10,7 @@ const createTask = async (req, res) => {
     res.status(201).json(task);
   } catch (error) {
     res.status(400).json({
+      success: false,
       message: error.message
     });
   }
@@ -50,6 +51,24 @@ const getTaskById = async (req, res) => {
 // Update a Task
 const updateTask = async (req, res) => {
   try {
+    const allowedUpdates = [
+      "title",
+      "description",
+      "completed"
+    ];
+
+    const updates = Object.keys(req.body);
+
+    const isValidOperation = updates.every((update) =>
+      allowedUpdates.includes(update)
+    );
+
+    if (!isValidOperation) {
+      return res.status(400).json({
+        message: "Invalid update field"
+      });
+    }
+
     const task = await Task.findByIdAndUpdate(
       req.params.id,
       req.body,
@@ -65,14 +84,16 @@ const updateTask = async (req, res) => {
       });
     }
 
-    res.status(200).json(task);
+    res.json(task);
+
   } catch (error) {
+
     res.status(400).json({
       message: error.message
     });
-  }
-};// Update a task
 
+  }
+};
 
 // Delete a task
 const deleteTask = async (req, res) => {
@@ -85,11 +106,18 @@ const deleteTask = async (req, res) => {
       });
     }
 
-    res.status(200).json(task);
+    res.json({
+      success: true,
+      message: "Task deleted successfully",
+      task
+    });
+
   } catch (error) {
+
     res.status(500).json({
       message: error.message
     });
+
   }
 };
 
