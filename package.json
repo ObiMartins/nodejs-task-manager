@@ -1,0 +1,36 @@
+{
+  "name": "nodejs-task-manager",
+  "version": "1.0.0",
+  "description": "Build a Node.js Task Manager API and create a GitHub Actions CI/CD pipeline.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ObiMartins/nodejs-task-manager.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ObiMartins/nodejs-task-manager/issues"
+  },
+  "homepage": "https://github.com/ObiMartins/nodejs-task-manager#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.8.0",
+    "globals": "^17.9.0",
+    "jest": "^30.4.2",
+    "nodemon": "^3.1.14",
+    "supertest": "^7.2.2"
+  }
+}
