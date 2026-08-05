@@ -1,29 +1,28 @@
 name: Node.js Task Manager CI/CD
+
 on:
   push:
-   branches:
+    branches:
       - main
-
 
   pull_request:
     branches:
-     - main
-
+      - main
 
   workflow_dispatch:
 
-
 jobs:
-   test:
-     runs-on: ubuntu-latest
-     steps:
-       - name: Checkout repository
-         uses: actions/checkout@v4
+  test:
+    runs-on: ubuntu-latest
 
-       - name: Set up Node js
-         uses: actions/setup-node@v4
-           with:
-              node-version: 22
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-       - name: Install dependencies
-         run: npm install
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install
