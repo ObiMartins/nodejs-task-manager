@@ -77,3 +77,12 @@ jobs:
           ignore-unfixed: true
           vuln-type: os,library
           severity: CRITICAL,HIGH
+
+      - name: Save Docker image
+        run: docker save nodejs-task-manager:latest -o nodejs-task-manager.tar
+
+      - name: Upload Docker image artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nodejs-task-manager-image
+          path: nodejs-task-manager.tar
