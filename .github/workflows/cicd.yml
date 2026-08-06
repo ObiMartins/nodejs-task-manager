@@ -49,4 +49,4 @@ jobs:
       - name: Generate Test Coverage
         env:
           MONGODB_URL: mongodb://127.0.0.1:27017/task-manager-api
-        run: npm run test: coverage
+        run: npm run test:coverage
