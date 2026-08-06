@@ -68,7 +68,7 @@ jobs:
       - name: Test health endpoint
         run: curl --fail http://localhost:3000/health
 
-       - name: Scan Docker image with Trivy
+      - name: Scan Docker image with Trivy
         uses: aquasecurity/trivy-action@0.28.0
         with:
           image-ref: nodejs-task-manager:latest
