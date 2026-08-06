@@ -50,3 +50,20 @@ jobs:
         env:
           MONGODB_URL: mongodb://127.0.0.1:27017/task-manager-api
         run: npm run test:coverage
+
+      - name: Build Docker image
+        run: docker build -t nodejs-task-manager .
+
+      - name: Run Docker container
+        run: |
+          docker run -d \
+            --name task-manager-api \
+            -p 3000:3000 \
+            -e MONGODB_URL=mongodb://host.docker.internal:27017/task-manager-api \
+            nodejs-task-manager
+
+      - name: Wait for application
+        run: sleep 10
+
+      - name: Test health endpoint
+        run: curl --fail http://localhost:3000/health
