@@ -86,3 +86,13 @@ jobs:
         with:
           name: nodejs-task-manager-image
           path: nodejs-task-manager.tar
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Simulate deployment
+        run: |
+          echo "🚀 Deploying Node.js Task Manager API..."
+          echo "Deployment completed successfully!"
