@@ -1,0 +1,14 @@
+name: Push Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Push Trigger Test
+        run: echo "Push trigger is working!"
