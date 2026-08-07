@@ -12,7 +12,6 @@ on:
   workflow_dispatch:
 
 jobs:
-
   test:
     name: Test & Coverage
     runs-on: ubuntu-latest
@@ -59,7 +58,7 @@ jobs:
           name: coverage-report
           path: coverage/
 
- service:
+  service:
     name: Container Service Test
     needs: test
     runs-on: ubuntu-latest
