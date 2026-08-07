@@ -94,3 +94,34 @@ jobs:
 
       - name: Test Health Endpoint
         run: curl --fail http://localhost:3000/health
+
+build:
+    name: Build & Security Scan
+    needs: service
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t nodejs-task-manager:latest .
+
+      - name: Scan Docker image with Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: nodejs-task-manager:latest
+          format: table
+          exit-code: 0
+          ignore-unfixed: true
+          vuln-type: os,library
+          severity: CRITICAL,HIGH
+
+      - name: Save Docker image
+        run: docker save nodejs-task-manager:latest -o nodejs-task-manager.tar
+
+      - name: Upload Docker image artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nodejs-task-manager-image
+          path: nodejs-task-manager.tar
