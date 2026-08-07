@@ -60,39 +60,39 @@ jobs:
           path: coverage/
 
 
-service:
-    name: Container Service Test
-    needs: test
-    runs-on: ubuntu-latest
+  service:
+      - name: Container Service Test
+        needs: test
+        runs-on: ubuntu-latest
 
-    services:
-      mongodb:
-        image: mongo:7
-        ports:
-          - 27017:27017
-        options: >-
-          --health-cmd="mongosh --eval 'db.runCommand({ ping: 1 })'"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
+        services:
+        mongodb:
+            image: mongo:7
+            ports:
+            - 27017:27017
+            options: >-
+            --health-cmd="mongosh --eval 'db.runCommand({ ping: 1 })'"
+            --health-interval=10s
+            --health-timeout=5s
+            --health-retries=5
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+       - name: Checkout repository
+         uses: actions/checkout@v4
 
-      - name: Build Docker image
-        run: docker build -t nodejs-task-manager .
+       - name: Build Docker image
+         run: docker build -t nodejs-task-manager .
 
-      - name: Run Docker container
-        run: |
-          docker run -d \
+       - name: Run Docker container
+         run: |
+            docker run -d \
             --name task-manager-api \
             -p 3000:3000 \
             -e MONGODB_URL=mongodb://host.docker.internal:27017/task-manager-api \
             nodejs-task-manager
 
-      - name: Wait for application
-        run: sleep 10
+       - name: Wait for application
+         run: sleep 10
 
-      - name: Test Health Endpoint
-        run: curl --fail http://localhost:3000/health
+       - name: Test Health Endpoint
+         run: curl --fail http://localhost:3000/health
